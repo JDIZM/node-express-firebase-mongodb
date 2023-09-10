@@ -20,20 +20,28 @@ To install volta run the following command in the terminal.
 curl https://get.volta.sh | bash
 ```
 
-### ESM Node
+## ESM Node
 
 https://www.typescriptlang.org/docs/handbook/esm-node.html
 
-### Install
+This project has been setup to use esm node. This allows us to use es6 imports in node.
 
-Build and install the package globally so you have access in your cli terminal.
+This uses [tsx](https://github.com/esbuild-kit/tsx) as a dev server and [pkgroll](https://github.com/privatenumber/pkgroll) to build the project.
 
-1. build `npm run build`
-2. install `npm run dev`
+## Setup
 
-Then test the package is working and installed by calling the package name `pkg-name` in your terminal.
+```
+# install dependencies
+npm i
 
-### Testing
+# start the dev server
+npm run dev
+
+# view it running on localhost
+curl localhost:3000
+```
+
+## Testing
 
 This project uses [vitest](https://vitest.dev/) for testing.
 
@@ -41,7 +49,7 @@ This project uses [vitest](https://vitest.dev/) for testing.
 
 It's also recommended to install the [vitest extension for vscode](https://marketplace.visualstudio.com/items?itemName=ZixuanChen.vitest-explorer).
 
-### Build with docker
+## Build with docker
 
 ```
 # build the app
@@ -55,4 +63,29 @@ It's also recommended to install the [vitest extension for vscode](https://marke
 
 # view it running on localhost
 `curl localhost:3000`
+```
+
+## Database
+
+```
+# after updating the model you want to generate the schema
+npx prisma generate
+```
+
+### env
+
+create a .env file in the root of the project and copy the contents of .env.example into it.
+
+You can replace `DATABASE_URL` with your mongodb connection string whether that be cloud or locally hosted.
+
+Note: when using Prisma the MongoDB database connector uses transactions to support nested writes. Transactions require a replica set deployment. The easiest way to deploy a replica set is with Atlas. It's free to get started.
+
+https://www.prisma.io/docs/concepts/database-connectors/mongodb
+
+### seed the db
+
+run the seed script to seed the db the first time.
+
+```bash
+npx prisma db seed
 ```
