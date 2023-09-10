@@ -6,7 +6,7 @@
   "module": "dist/server.mjs",
   "type": "module",
   "imports": {
-    "@/helpers": "./helpers"
+    "@/helpers": "./src/helpers"
   },
   "scripts": {
     "lint": "eslint . --ext .ts,.tsx --max-warnings 0",
@@ -38,7 +38,6 @@
     "prettier": "^2.8.7",
     "tsx": "^3.12.8",
     "typescript": "^5.0.4",
-    "vite-node": "^0.31.1",
     "vitest": "^0.31.1"
   },
   "files": [

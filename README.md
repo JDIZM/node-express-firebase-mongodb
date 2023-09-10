@@ -1,22 +1,14 @@
 # node-express-backend-component
 
-- [vite-node](https://github.com/vitest-dev/vitest/tree/main/packages/vite-node)
+- [tsx](https://github.com/esbuild-kit/tsx)
+- [pkgroll](https://github.com/privatenumber/pkgroll)
 - [esbuild](https://esbuild.github.io/)
 - [eslint](https://eslint.org/)
 - [prettier](https://prettier.io/)
 - [typescript](https://www.typescriptlang.org/)
 - [vitest](https://vitest.dev/)
 
-A few things to understand
-
-1. building with esbuild
-2. building with the typescript compiler
-
-Importing the package.json makes the tsc compiler bundle the /src folder into the /dist folder. To keep these two build options working together esbuild is configured to nest the output in /src folder too.
-
-Have a play around with the configuration and build options to suit the project.
-
-This is a work in progress template and welcome to feedback.
+A simple node/express backend api template.
 
 ## Requirements
 
@@ -36,8 +28,8 @@ https://www.typescriptlang.org/docs/handbook/esm-node.html
 
 Build and install the package globally so you have access in your cli terminal.
 
-1. build `npm run build:es`
-2. install `npm install -g .`
+1. build `npm run build`
+2. install `npm run dev`
 
 Then test the package is working and installed by calling the package name `pkg-name` in your terminal.
 
@@ -48,3 +40,19 @@ This project uses [vitest](https://vitest.dev/) for testing.
 1. run the unit tests with `npm run test`
 
 It's also recommended to install the [vitest extension for vscode](https://marketplace.visualstudio.com/items?itemName=ZixuanChen.vitest-explorer).
+
+### Build with docker
+
+```
+# build the app
+`npm run build`
+
+# build with docker
+`docker build . --tag node-express`
+
+# start the docker container
+`docker run -d -p 3000:3000 node-express`
+
+# view it running on localhost
+`curl localhost:3000`
+```
