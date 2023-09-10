@@ -89,3 +89,9 @@ run the seed script to seed the db the first time.
 ```bash
 npx prisma db seed
 ```
+
+## Import aliases
+
+Aliases can be configured in the import map, defined in package.json#imports.
+
+see: https://github.com/privatenumber/pkgroll#aliases
