@@ -1,16 +1,28 @@
-3; // const express = require("express");
-import express = require("express");
-// import morgan = require("morgan");
-// const dotenv = require("dotenv");
+import express from "express";
+import dotenv from "dotenv";
+import { pinoHttp } from "pino-http";
+import { test } from "@/helpers/index.js";
 
-// dotenv.config();
+const { logger } = pinoHttp();
+
+const env = process.env.NODE_ENV || "development";
+const port = process.env.PORT || 3000;
+
+if (env !== "production") {
+  dotenv.config();
+}
 
 const app = express();
-// const port = process.env.PORT;
-const port = 3000;
+
+app.use(
+  pinoHttp({
+    logger
+  })
+);
 
 app.get("/", (req, res) => {
-  res.send("Express + TypeScript Server");
+  logger.info("hello world");
+  res.send(`Express + TypeScript Server ${test}`);
 });
 
 app.listen(port, () => {

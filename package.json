@@ -1,19 +1,20 @@
 {
-  "name": "compound-interest",
+  "name": "node-express-backend-component",
   "version": "1.0.0",
   "description": "",
-  "main": "dist/src/index.cjs",
-  "module": "dist/src/index.esm.js",
+  "main": "dist/server.cjs",
+  "module": "dist/server.mjs",
   "type": "module",
-  "bin": {
-    "pkg-name": "./dist/src/index.cjs"
+  "imports": {
+    "@/helpers": "./helpers"
   },
   "scripts": {
-    "dev": "npx vite-node ./src/index.ts",
     "lint": "eslint . --ext .ts,.tsx --max-warnings 0",
     "format": "prettier -w '**/*.{js,ts,mjs,cjs,json,tsx,jsx}'",
     "format:check": "prettier --check '**/*.{js,ts,mjs,cjs,json,tsx,jsx}'",
     "tsc:check": "tsc -p tsconfig.json --noEmit",
+    "dev": "tsx watch ./src/server.ts",
+    "build": "pkgroll",
     "build:tsc": "rm -rf dist && tsc -p tsconfig.json",
     "build:esm": "npm run tsc:check && rm -rf dist && node build.mjs",
     "test": "vitest --run --coverage"
@@ -22,17 +23,20 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "@types/node": "^20.2.1",
     "@types/express": "^4.17.17",
+    "@types/node": "^20.2.1",
     "@typescript-eslint/eslint-plugin": "^5.57.0",
     "@typescript-eslint/parser": "^5.57.0",
     "@vitest/coverage-c8": "^0.32.0",
+    "dotenv": "^16.3.1",
     "esbuild": "^0.18.1",
     "eslint": "^8.37.0",
     "eslint-config-prettier": "^8.8.0",
     "eslint-import-resolver-typescript": "^3.5.5",
     "eslint-plugin-import": "^2.27.5",
+    "pkgroll": "^1.11.0",
     "prettier": "^2.8.7",
+    "tsx": "^3.12.8",
     "typescript": "^5.0.4",
     "vite-node": "^0.31.1",
     "vitest": "^0.31.1"
@@ -44,12 +48,16 @@
     "node": "16.18.1"
   },
   "exports": {
-    ".": {
-      "import": "./dist/src/index.esm.js",
-      "require": "./dist/src/index.cjs"
+    "require": {
+      "default": "./dist/server.cjs"
+    },
+    "import": {
+      "default": "./dist/server.mjs"
     }
   },
   "dependencies": {
-    "express": "^4.18.2"
+    "express": "^4.18.2",
+    "pino": "^8.15.1",
+    "pino-http": "^8.5.0"
   }
 }
