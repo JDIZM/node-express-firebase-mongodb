@@ -2,7 +2,6 @@
 
 - [tsx](https://github.com/esbuild-kit/tsx)
 - [pkgroll](https://github.com/privatenumber/pkgroll)
-- [esbuild](https://esbuild.github.io/)
 - [eslint](https://eslint.org/)
 - [prettier](https://prettier.io/)
 - [typescript](https://www.typescriptlang.org/)
@@ -24,9 +23,9 @@ curl https://get.volta.sh | bash
 
 https://www.typescriptlang.org/docs/handbook/esm-node.html
 
-This project has been setup to use esm node. This allows us to use es6 imports in node.
+This project has been setup to use ESM Node. This allows us to use ES6 imports in Node.
 
-This uses [tsx](https://github.com/esbuild-kit/tsx) as a dev server and [pkgroll](https://github.com/privatenumber/pkgroll) to build the project.
+This uses [tsx](https://github.com/esbuild-kit/tsx) as a dev server and [pkgroll](https://github.com/privatenumber/pkgroll) to bundle and build the project.
 
 ## Setup
 
