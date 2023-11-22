@@ -1,7 +1,7 @@
 import express from "express";
 import dotenv from "dotenv";
 import { pinoHttp } from "pino-http";
-import { test } from "@/helpers/index.js";
+import { routes } from "./routes/index.js";
 
 const { logger } = pinoHttp();
 
@@ -20,10 +20,7 @@ app.use(
   })
 );
 
-app.get("/", (req, res) => {
-  logger.info("hello world");
-  res.send(`Express + TypeScript Server ${test}`);
-});
+routes(app);
 
 app.listen(port, () => {
   console.log(`[server]: Server is running at http://localhost:${port}`);
