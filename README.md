@@ -56,16 +56,19 @@ It's also recommended to install the [vitest extension for vscode](https://marke
 
 ```
 # build the app
-`npm run build`
+npm run build
 
 # build with docker
-`docker build . --tag node-express`
+docker build . --tag node-express
+
+# or to build with a specific platform
+docker build . --tag node-express --platform linux/amd64
 
 # start the docker container
-`docker run -d -p 3000:3000 node-express`
+docker run -d -p 3000:3000 node-express
 
 # view it running on localhost
-`curl localhost:3000`
+curl localhost:3000
 ```
 
 ## Database
