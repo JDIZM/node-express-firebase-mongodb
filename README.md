@@ -6,6 +6,8 @@
 - [prettier](https://prettier.io/)
 - [typescript](https://www.typescriptlang.org/)
 - [vitest](https://vitest.dev/)
+- [prisma](https://www.prisma.io/)
+- [mongodb](https://www.mongodb.com/)
 
 A simple node/express backend api template.
 
