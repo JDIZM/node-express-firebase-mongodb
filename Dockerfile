@@ -8,4 +8,4 @@ COPY package-lock.json /app
 
 RUN npm ci
 
-CMD ["node", "server.mjs"]
+CMD ["node", "server.cjs"]
