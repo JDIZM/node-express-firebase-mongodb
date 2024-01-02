@@ -27,6 +27,8 @@ This project has been setup to use ESM Node. This allows us to use ES6 imports i
 
 This uses [tsx](https://github.com/esbuild-kit/tsx) as a dev server and [pkgroll](https://github.com/privatenumber/pkgroll) to bundle and build the project.
 
+Note: Prisma does not support ESM by default and [have an open issue](https://github.com/prisma/prisma/issues/5030) -- looking to migrate this to another ORM (drizzle) for ESM support
+
 ## Setup
 
 ```
