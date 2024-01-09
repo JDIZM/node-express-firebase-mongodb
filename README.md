@@ -8,6 +8,8 @@
 - [vitest](https://vitest.dev/)
 - [prisma](https://www.prisma.io/)
 - [mongodb](https://www.mongodb.com/)
+- [zod](https://zod.dev/)
+- [zod-prisma-types](https://github.com/chrishoermann/zod-prisma-types)
 
 A simple node/express backend api template.
 
