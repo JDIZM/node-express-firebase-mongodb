@@ -23,6 +23,9 @@ To install volta run the following command in the terminal.
 curl https://get.volta.sh | bash
 ```
 
+This will require a mongodb database to be setup.
+You can set one up at https://cloud.mongodb.com/
+
 ## ESM Node
 
 https://www.typescriptlang.org/docs/handbook/esm-node.html
@@ -75,20 +78,17 @@ curl localhost:3000
 
 ## Database
 
-```
-# after updating the model you want to generate the schema
-npx prisma generate
-```
+This is setup to use MongoDB with Prisma. If you want to use a different database you can change the db provider in Prisma schema and use a different Database.
+
+Note: when using Prisma the MongoDB database connector uses transactions to support nested writes. Transactions require a replica set deployment. The easiest way to deploy a replica set is with Atlas. It's free to get started.
+
+https://www.prisma.io/docs/concepts/database-connectors/mongodb
 
 ### env
 
 create a .env file in the root of the project and copy the contents of .env.example into it.
 
 You can replace `DATABASE_URL` with your mongodb connection string whether that be cloud or locally hosted.
-
-Note: when using Prisma the MongoDB database connector uses transactions to support nested writes. Transactions require a replica set deployment. The easiest way to deploy a replica set is with Atlas. It's free to get started.
-
-https://www.prisma.io/docs/concepts/database-connectors/mongodb
 
 ### seed the db
 
@@ -98,8 +98,42 @@ run the seed script to seed the db the first time.
 npx prisma db seed
 ```
 
+### updating db schema
+
+```
+# after updating the model you want to generate the schema
+npx prisma generate
+```
+
 ## Import aliases
 
 Aliases can be configured in the import map, defined in package.json#imports.
 
 see: https://github.com/privatenumber/pkgroll#aliases
+
+## Authentication
+
+This project uses JWT bearer token for authentication. The claims, id and sub must be set on the token and the token can be verified and decoded using the configured auth provider.
+
+## Permissions
+
+How permissions work.
+
+A resource will have a permission level. A user will have a role/claim.
+
+Routes will have their permission level defined in `./src/helpers/permissions.ts`
+
+When a user makes a request to a route the route will check the user's role/claim against the permission level of the resource.
+
+### Route permission levels
+
+1. Owner - Route can only be accessed by the owner of the resource. Defined by the id of the resource being accessed matching the id of the user making the request.
+2. User - Can access all resources with user permissions.
+3. Admin - Can access all resources.
+
+### Claims
+
+A claim is defined when the user is created which defines the user's role and permissions level.
+
+1. User - default user permissions
+2. Admin - admin permissions
