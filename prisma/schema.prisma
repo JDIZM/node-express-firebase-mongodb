@@ -19,4 +19,5 @@ model Users {
   email    String   @unique
   password String
   username String   @unique
+  sub String  @unique // users firebase id
 }
