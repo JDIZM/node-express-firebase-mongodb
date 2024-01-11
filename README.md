@@ -119,6 +119,17 @@ see: https://github.com/privatenumber/pkgroll#aliases
 
 This project uses JWT bearer token for authentication. The claims, id and sub must be set on the token and the token can be verified and decoded using the configured auth provider.
 
+You can sign in an retrieve user tokens without having to use the client sdk.
+
+See the [Firebase REST API docs for more info on how to sign in with email and password.](https://firebase.google.com/docs/reference/rest/auth#section-sign-in-email-password)
+
+Sign in with email and password is supported out of the box with Firebase Auth.
+
+```js
+# sign in with email and password by posting
+https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=[API_KEY]
+```
+
 ## Permissions
 
 How permissions work.
