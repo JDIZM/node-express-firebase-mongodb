@@ -1,5 +1,7 @@
 import { Route, permissions } from "@/helpers/permissions.ts";
 import { NextFunction, Request, Response } from "express";
+import { getAuth } from "firebase-admin/auth";
+import { app } from "@/services/firebase.ts";
 
 // https://stackabuse.com/bytes/how-to-get-a-users-ip-address-in-express-js/
 const getIpFromRequest = (req: Request): string | undefined => {
@@ -30,23 +32,14 @@ export const isAuthenticated = async (req: Request, res: Response, next: NextFun
   }
 
   try {
-    // TODO Verify token using your auth service. eg Firebase.
-    // const verified = await getAuth(app).verifyIdToken(token, true);
+    // Verify token using your auth service. eg Firebase.
+    // Custom claims will need to be set for the user using the setFirebaseClaims function and permissions endpoint.
+    const verified = await getAuth(app).verifyIdToken(token, true);
+    console.log("verified", verified);
 
-    // TODO get user from DB.
-    // const user = await getUserBySub(verified.sub);
+    // Attach user to res.locals and verify permissions in isAuthorized middleware
+    res.locals = { id: verified.userId, sub: verified.sub, claims: verified.claims };
 
-    // TODO Attach user to res.locals and verify permissions in isAuthorized middleware
-    // res.locals = { id: user?.id, sub: verified.sub, claims: verified.claims };
-
-    // TODO Remove this example res.locals
-    // Example res.locals with user info to test isAuthorized middleware
-    // Change user claims and id to test different permission levels.
-    res.locals = {
-      id: "64fddb347cd3cfb4902ab285",
-      sub: "64fddb347cd3cfb4902ab285",
-      claims: ["admin"]
-    };
     return next();
   } catch (error) {
     return res.status(401).send(error);
