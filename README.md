@@ -10,6 +10,9 @@
 - [mongodb](https://www.mongodb.com/)
 - [zod](https://zod.dev/)
 - [zod-prisma-types](https://github.com/chrishoermann/zod-prisma-types)
+- [firebase auth](https://firebase.google.com/docs/auth/admin)
+- [gcp](https://cloud.google.com/)
+- [digitalocean](https://www.digitalocean.com/)
 
 A simple node/express backend api template.
 
@@ -23,8 +26,9 @@ To install volta run the following command in the terminal.
 curl https://get.volta.sh | bash
 ```
 
-This will require a mongodb database to be setup.
-You can set one up at https://cloud.mongodb.com/
+This will require a mongodb database to be setup. You can set one up at https://cloud.mongodb.com/
+
+This project also uses firebase auth for authentication. You can set one up at https://firebase.google.com/ and deployment is handled with DigitalOcean. See the authentication and deployment sections for more info.
 
 ## ESM Node
 
@@ -125,6 +129,8 @@ Routes will have their permission level defined in `./src/helpers/permissions.ts
 
 When a user makes a request to a route the route will check the user's role/claim against the permission level of the resource.
 
+Permissions for the user can be set using the /auth/set-permissions endpoint which sets the database userId and claims on the firebase user. The token will have access to this data to verify the user's permissions.
+
 ### Route permission levels
 
 1. Owner - Route can only be accessed by the owner of the resource. Defined by the id of the resource being accessed matching the id of the user making the request.
@@ -137,3 +143,31 @@ A claim is defined when the user is created which defines the user's role and pe
 
 1. User - default user permissions
 2. Admin - admin permissions
+
+## Firebase Auth
+
+This project uses Firebase Auth for authentication. The firebase admin sdk is used to verify the token and decode the claims.
+
+Because we are not running in a google environment we need to initialize the firebase admin sdk with a service account key file.
+
+This requires a service account key file at `$HOME/gcloud.json`. The `GOOGLE_APPLICATION_CREDENTIALS` env variable must be set to the path of the service account key file.
+
+You can create a service account from the firebase console and place in your home directory and set the environment variable like so:
+
+```
+export GOOGLE_APPLICATION_CREDENTIALS=$HOME/gcloud.json
+```
+
+When running in CI/CD the service account key file is stored as a secret and the env variable is set in the Dockerfile using the copied service account key file fron secrets.
+
+## Deployment with DigitalOcean
+
+A docker image can be built and deployed to a [container registry](https://docs.digitalocean.com/products/container-registry/getting-started/quickstart/). We can configure DigitalOcean to deploy the image once the registry updates using their [App Platform](https://docs.digitalocean.com/products/app-platform/)
+
+The following secrets will need to be added to Github Actions for a successful deployment to DigitalOcean.
+
+- `DIGITALOCEAN_ACCESS_TOKEN` https://docs.digitalocean.com/reference/api/create-personal-access-token/
+- `REGISTRY_NAME` eg registry.digitalocean.com/my-container-registry
+- `SERVICE_ACCOUNT_DEV` The GOOGLE_APPLICATION_CREDENTIALS Service Account file for development env.
+- `SERVICE_ACCOUNT_PROD` The GOOGLE_APPLICATION_CREDENTIALS Service Account file for production env.
+- `IMAGE_NAME` the name of the image we are pushing to the repository eg `express-api` it will be tagged with the latest version and a github sha.
