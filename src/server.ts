@@ -15,6 +15,12 @@ app.use(
   })
 );
 
+// parse application/x-www-form-urlencoded
+app.use(express.urlencoded({ extended: true }));
+
+// parse application/json
+app.use(express.json());
+
 routes(app);
 
 app.listen(config.port, () => {
