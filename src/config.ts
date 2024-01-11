@@ -10,5 +10,6 @@ if (ENV !== "production") {
 
 export const config = {
   env: ENV,
-  port: process.env.PORT || 3000
+  port: process.env.PORT || 3000,
+  appUrl: process.env.APP_URL ?? "http://localhost"
 };
