@@ -14,7 +14,8 @@ export async function seedUsers(): Promise<void> {
       username: "fred",
       password: hashedPassword,
       email: "fred@flintstones.com",
-      claims: ["admin", "user"]
+      claims: ["admin", "user"],
+      sub: "123456789"
     }
   });
 
@@ -25,7 +26,8 @@ export async function seedUsers(): Promise<void> {
       username: "barney",
       password: hashedPassword,
       email: "barney@flintstones.com",
-      claims: ["user"]
+      claims: ["user"],
+      sub: "987654321"
     }
   });
 
