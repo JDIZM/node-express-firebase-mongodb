@@ -181,4 +181,5 @@ The following secrets will need to be added to Github Actions for a successful d
 - `REGISTRY_NAME` eg registry.digitalocean.com/my-container-registry
 - `SERVICE_ACCOUNT_DEV` The GOOGLE_APPLICATION_CREDENTIALS Service Account file for development env.
 - `SERVICE_ACCOUNT_PROD` The GOOGLE_APPLICATION_CREDENTIALS Service Account file for production env.
-- `IMAGE_NAME` the name of the image we are pushing to the repository eg `express-api` it will be tagged with the latest version and a github sha.
+- `IMAGE_NAME_DEV` the name of the DEV image we are pushing to the repository eg `express-api` it will be tagged with the latest version and a github sha.
+- `IMAGE_NAME_PROD` the name of the PROD image we are pushing to the repository eg `express-api` it will be tagged with the latest version and a github sha.
