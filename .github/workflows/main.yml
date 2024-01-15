@@ -41,13 +41,13 @@ jobs:
   #         token: ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }}
 
   #     - name: Build container image
-  #       run: docker build -t ${{ secrets.REGISTRY_NAME }}/${{secrets.IMAGE_NAME}}:$(echo $GITHUB_SHA | head -c7) .
+  #       run: docker build -t ${{ secrets.REGISTRY_NAME }}/${{secrets.IMAGE_NAME_DEV}}:$(echo $GITHUB_SHA | head -c7) .
 
   #     - name: Log in to DigitalOcean Container Registry with short-lived credentials
   #       run: doctl registry login --expiry-seconds 1200
 
   #     - name: tag image with latest tag
-  #       run: docker tag ${{ secrets.REGISTRY_NAME }}/${{secrets.IMAGE_NAME}}:$(echo $GITHUB_SHA | head -c7) ${{ secrets.REGISTRY_NAME }}/calls-api:latest
+  #       run: docker tag ${{ secrets.REGISTRY_NAME }}/${{secrets.IMAGE_NAME_DEV}}:$(echo $GITHUB_SHA | head -c7) ${{ secrets.REGISTRY_NAME }}/${{secrets.IMAGE_NAME_DEV}}:latest
 
   #     - name: Push image to DigitalOcean Container Registry
-  #       run: docker push ${{ secrets.REGISTRY_NAME }}/${{secrets.IMAGE_NAME}}:latest
+  #       run: docker push ${{ secrets.REGISTRY_NAME }}/${{secrets.IMAGE_NAME_DEV}}:latest
