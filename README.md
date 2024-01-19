@@ -80,6 +80,8 @@ docker run -d -p 3000:3000 node-express
 curl localhost:3000
 ```
 
+When building with Docker locally it will require the service account key in the project root; this is because the Dockerfile is copying the service account key file into the image. See the [Firebase Auth](#firebase-auth) section for more info on the service account key file and Google Application Credentials.
+
 ## Database
 
 This is setup to use MongoDB with Prisma. If you want to use a different database you can change the db provider in Prisma schema and use a different Database.
