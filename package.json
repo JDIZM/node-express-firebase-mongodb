@@ -39,7 +39,7 @@
     "typescript": "^5.0.4",
     "vitest": "^1.2.1",
     "zod": "^3.21.4",
-    "zod-prisma-types": "^2.7.9"
+    "zod-prisma-types": "^3.0.0"
   },
   "prisma": {
     "seed": "tsx prisma/seed.ts"
