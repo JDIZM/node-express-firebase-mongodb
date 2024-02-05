@@ -2,7 +2,7 @@ import { describe, expect, it, beforeEach } from "vitest";
 import { isAuthorized } from "./isAuthorized.js";
 import { NextFunction } from "express";
 
-const USER_OBJECT_ID = "407e4af9-208b-4af7-8b17-dac60f3ebb30";
+const USER_OBJECT_ID = "656b874c4c5f8e56690b3c9d";
 
 describe("isAuthorized", () => {
   let req: any;
