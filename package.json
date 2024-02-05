@@ -68,5 +68,8 @@
     "mongodb": "^6.3.0",
     "pino": "^8.15.1",
     "pino-http": "^9.0.0"
+  },
+  "optionalDependencies": {
+    "@rollup/rollup-linux-x64-gnu": "^4.9.6"
   }
 }
