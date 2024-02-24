@@ -23,7 +23,7 @@ jobs:
       - run: npm run build
       - run: npm run test
   # TODO uncomment the deployment step when you have configured the secrets.
-  # deploy-dev:
+  # deploy-prod:
   #   needs: test-and-build
   #   runs-on: ubuntu-latest
   #   steps:
