@@ -53,6 +53,8 @@ npm run dev
 curl localhost:3000
 ```
 
+Be sure to configure the .env file with the correct values and make sure you have a mongodb database setup and firebase application credentials.
+
 ## Testing
 
 This project uses [vitest](https://vitest.dev/) for testing.
