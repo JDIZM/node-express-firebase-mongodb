@@ -38,7 +38,7 @@ export const isAuthenticated = async (req: Request, res: Response, next: NextFun
     console.log("verified", verified);
 
     // Attach user to res.locals and verify permissions in isAuthorized middleware
-    res.locals = { id: verified.userId, sub: verified.sub, claims: verified.claims };
+    res.locals = { id: verified.uid, sub: verified.sub, claims: verified.claims };
 
     return next();
   } catch (error) {
