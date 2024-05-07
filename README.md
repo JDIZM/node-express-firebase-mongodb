@@ -38,7 +38,11 @@ This project has been setup to use ESM Node. This allows us to use ES6 imports i
 
 This uses [tsx](https://github.com/esbuild-kit/tsx) as a dev server and [pkgroll](https://github.com/privatenumber/pkgroll) to bundle and build the project.
 
-Note: Prisma does not support ESM by default and [have an open issue](https://github.com/prisma/prisma/issues/5030) -- looking to migrate this to another ORM (drizzle) for ESM support
+Note: Prisma does not support ESM by default and [have an open issue](https://github.com/prisma/prisma/issues/5030) -- looking to migrate this to another ORM (drizzle) for ESM support.
+
+"the Prisma client relies on globals like `__dirname` that used to be part of Node but in ESM have been moved to import.meta.dirname. See: https://stackoverflow.com/questions/46745014/alternative-for-dirname-in-node-js-when-using-es6-modules"
+
+As a result of this it's best to stick to the `.cjs` format when running in production.
 
 ## Setup
 
@@ -64,6 +68,16 @@ This project uses [vitest](https://vitest.dev/) for testing.
 It's also recommended to install the [vitest extension for vscode](https://marketplace.visualstudio.com/items?itemName=ZixuanChen.vitest-explorer).
 
 ## Build with docker
+
+### locally
+
+The `GOOGLE_APPLICATION_CREDENTIALS` env variable is mapped to the docker container from your home directory. This is required for the firebase admin sdk to verify the token and decode the claims. see the [Firebase Auth](#firebase-auth) section for more info on the service account key file and Google Application Credentials.
+
+```
+docker compose up -d
+```
+
+### production
 
 ```
 # build the app
