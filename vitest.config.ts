@@ -12,7 +12,7 @@ export default defineConfig({
     exclude: [...configDefaults.exclude],
     root: fileURLToPath(new URL("./src", import.meta.url)),
     coverage: {
-      provider: "istanbul",
+      provider: "istanbul"
     }
   }
 });
