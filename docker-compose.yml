@@ -1,16 +1,14 @@
-version: "3.1"
-
 services:
   app:
     build:
       context: .
     environment:
-      - NODE_ENV=development
+      - NODE_ENV=${NODE_ENV:-development}
       - DATABASE_URL=${DATABASE_URL}
-      - APP_URL=${APP_URL}
       - PORT=${PORT}
     ports:
       - "${PORT}:${PORT}"
     volumes:
       # set the GOOGLE_APPLICATION_CREDENTIALS env variable to the path of the gcloud.json file
-      - $HOME/gcloud.json:/app/gcloud.json
+      # will use the default path if not set. If shell env is set it will take precedence.
+      - ${GOOGLE_APPLICATION_CREDENTIALS:-$HOME/gcloud.json}:/app/gcloud.json

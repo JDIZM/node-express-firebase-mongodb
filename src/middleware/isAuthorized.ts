@@ -20,7 +20,7 @@ export const isAuthorized = async (req: Request, res: Response, next: NextFuncti
 
   // If the user is not logged in, deny access.
   if (!sub || !claims || !id || !claims.length) {
-    return res.status(401).send("Unauthorized");
+    return res.status(403).send("Unauthorized");
   }
 
   // If the user is an admin, allow access.
@@ -38,6 +38,6 @@ export const isAuthorized = async (req: Request, res: Response, next: NextFuncti
       return next();
     }
 
-    return res.status(401).send("Unauthorized");
+    return res.status(403).send("Unauthorized");
   }
 };

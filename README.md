@@ -1,4 +1,4 @@
-# node-express-backend-component
+# node-express-firebase-mongodb
 
 - [tsx](https://github.com/esbuild-kit/tsx)
 - [pkgroll](https://github.com/privatenumber/pkgroll)
@@ -13,6 +13,8 @@
 - [firebase auth](https://firebase.google.com/docs/auth/admin)
 - [gcp](https://cloud.google.com/)
 - [digitalocean](https://www.digitalocean.com/)
+- [helmet](https://helmetjs.github.io/)
+- [cookie-parser](https://www.npmjs.com/package/cookie-parser)
 
 A simple node/express backend api template.
 
@@ -28,7 +30,7 @@ curl https://get.volta.sh | bash
 
 This will require a mongodb database to be setup. You can set one up at https://cloud.mongodb.com/
 
-This project also uses firebase auth for authentication. You can set one up at https://firebase.google.com/ and deployment is handled with DigitalOcean. See the authentication and deployment sections for more info.
+This project also uses firebase auth for authentication. You can set one up at https://firebase.google.com/ and deployment is handled with DigitalOcean. See the [Firebase Auth](#firebase-auth) section for more info on setting up your credentials and project.
 
 ## ESM Node
 
@@ -54,7 +56,7 @@ npm i
 npm run dev
 
 # view it running on localhost
-curl localhost:3000
+curl localhost:4000
 ```
 
 Be sure to configure the .env file with the correct values and make sure you have a mongodb database setup and firebase application credentials.
@@ -90,13 +92,13 @@ docker build . --tag node-express
 docker build . --tag node-express --platform linux/amd64
 
 # start the docker container
-docker run -d -p 3000:3000 node-express
+docker run -d -p 4000:4000 node-express
 
 # view it running on localhost
-curl localhost:3000
+curl localhost:4000
 ```
 
-When building with Docker locally it will require the service account key in the project root; this is because the Dockerfile is copying the service account key file into the image. See the [Firebase Auth](#firebase-auth) section for more info on the service account key file and Google Application Credentials.
+When building with Docker locally it will require the service account key to be set; this is because the Dockerfile is copying the service account key file into the image. See the [Firebase Auth](#firebase-auth) section for more info on the service account key file and Google Application Credentials.
 
 ## Database
 
@@ -146,6 +148,9 @@ Sign in with email and password is supported out of the box with Firebase Auth.
 ```js
 # sign in with email and password by posting
 https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=[API_KEY]
+
+# refresh token
+https://securetoken.googleapis.com/v1/token?key=[API_KEY]
 ```
 
 ## Permissions
@@ -177,7 +182,7 @@ A claim is defined when the user is created which defines the user's role and pe
 
 This project uses Firebase Auth for authentication. The firebase admin sdk is used to verify the token and decode the claims.
 
-Because we are not running in a google environment we need to initialize the firebase admin sdk with a service account key file.
+Because we are not running in a google environment we need to initialize the firebase admin sdk with a service account key file. see the [Firebase Admin SDK docs](https://firebase.google.com/docs/admin/setup#initialize_the_sdk_in_non-google_environments) for more info.
 
 This requires a service account key file at `$HOME/gcloud.json`. The `GOOGLE_APPLICATION_CREDENTIALS` env variable must be set to the path of the service account key file.
 
@@ -186,6 +191,8 @@ You can create a service account from the firebase console and place in your hom
 ```
 export GOOGLE_APPLICATION_CREDENTIALS=$HOME/gcloud.json
 ```
+
+You can also set this in the `.env` file but if you have set the env variable in your shell it will take precedence.
 
 When running in CI/CD the service account key file is stored as a secret and the env variable is set in the Dockerfile using the copied service account key file fron secrets.
 
