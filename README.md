@@ -1,4 +1,4 @@
-# node-express-backend-component
+# node-express-firebase-mongodb
 
 - [tsx](https://github.com/esbuild-kit/tsx)
 - [pkgroll](https://github.com/privatenumber/pkgroll)
@@ -13,6 +13,8 @@
 - [firebase auth](https://firebase.google.com/docs/auth/admin)
 - [gcp](https://cloud.google.com/)
 - [digitalocean](https://www.digitalocean.com/)
+- [helmet](https://helmetjs.github.io/)
+- [cookie-parser](https://www.npmjs.com/package/cookie-parser)
 
 A simple node/express backend api template.
 
@@ -54,7 +56,7 @@ npm i
 npm run dev
 
 # view it running on localhost
-curl localhost:3000
+curl localhost:4000
 ```
 
 Be sure to configure the .env file with the correct values and make sure you have a mongodb database setup and firebase application credentials.
@@ -90,10 +92,10 @@ docker build . --tag node-express
 docker build . --tag node-express --platform linux/amd64
 
 # start the docker container
-docker run -d -p 3000:3000 node-express
+docker run -d -p 4000:4000 node-express
 
 # view it running on localhost
-curl localhost:3000
+curl localhost:4000
 ```
 
 When building with Docker locally it will require the service account key to be set; this is because the Dockerfile is copying the service account key file into the image. See the [Firebase Auth](#firebase-auth) section for more info on the service account key file and Google Application Credentials.
