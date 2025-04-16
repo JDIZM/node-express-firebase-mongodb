@@ -1,6 +1,6 @@
 # use a slimmer alpine image to consume less memory
 # https://viralganatra.com/docker-nodejs-production-secure-best-practices/
-FROM node:20-alpine AS base
+FROM node:22-alpine AS base
 
 ENV PNPM_VERSION=9.4.0
 
