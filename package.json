@@ -46,7 +46,7 @@
     "dist"
   ],
   "volta": {
-    "node": "20.19.5"
+    "node": "22.21.0"
   },
   "dependencies": {
     "@prisma/client": "^5.2.0",
