@@ -36,7 +36,7 @@
     "tsx": "^4.0.0",
     "typescript": "^5.0.4",
     "vitest": "^3.0.0",
-    "zod": "^3.21.4",
+    "zod": "^4.0.0",
     "zod-prisma-types": "^3.0.0"
   },
   "prisma": {
